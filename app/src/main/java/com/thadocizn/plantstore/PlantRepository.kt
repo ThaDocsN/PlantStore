@@ -1,7 +1,7 @@
 package com.thadocizn.plantstore
 
-import android.arch.lifecycle.LiveData
-import android.support.annotation.WorkerThread
+import androidx.lifecycle.LiveData
+import androidx.annotation.WorkerThread
 import com.thadocizn.plantstore.models.Category
 import com.thadocizn.plantstore.models.Plant
 
