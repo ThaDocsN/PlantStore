@@ -1,4 +1,4 @@
-package com.thadocizn.plantstore
+package com.thadocizn.plantstore.models
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

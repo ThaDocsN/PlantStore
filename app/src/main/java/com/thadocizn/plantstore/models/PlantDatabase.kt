@@ -1,13 +1,9 @@
-package com.thadocizn.plantstore
+package com.thadocizn.plantstore.models
 
-import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
-import android.os.AsyncTask
-import com.thadocizn.plantstore.models.Category
-import com.thadocizn.plantstore.models.Plant
 
 
 /**

@@ -1,9 +1,11 @@
-package com.thadocizn.plantstore
+package com.thadocizn.plantstore.models
 
 import androidx.lifecycle.LiveData
 import androidx.annotation.WorkerThread
 import com.thadocizn.plantstore.models.Category
+import com.thadocizn.plantstore.models.CategoryDAO
 import com.thadocizn.plantstore.models.Plant
+import com.thadocizn.plantstore.models.PlantDAO
 
 
 /**
