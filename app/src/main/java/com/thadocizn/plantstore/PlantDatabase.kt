@@ -81,7 +81,6 @@ abstract class PlantDatabase : RoomDatabase() {
             plantDAO.insert(plant10)
             plantDAO.insert(plant11)
 
-
                 return null
         }
     }
