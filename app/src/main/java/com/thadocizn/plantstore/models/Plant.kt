@@ -6,7 +6,7 @@ import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.android.databinding.library.baseAdapters.BR
+import androidx.databinding.library.baseAdapters.BR
 
 /**
  * Created by charles on 15,May,2019

@@ -1,9 +1,13 @@
 package com.thadocizn.plantstore.models
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import android.content.Context
+import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 /**
@@ -14,21 +18,49 @@ abstract class PlantDatabase : RoomDatabase() {
 
     abstract fun categoryDAO(): CategoryDAO
     abstract fun plantDAO(): PlantDAO
-    companion object{
+
+    companion object {
 
         @Volatile
-        private var instance: PlantDatabase? = null
-        fun getInstance(context: Context): PlantDatabase {
-            if (instance == null) {
-                @Synchronized
-                instance = Room.databaseBuilder(
-                    context,
-                    PlantDatabase::class.java, "plant_database")
-                    .fallbackToDestructiveMigration()
+        private var Instance: PlantDatabase? = null
+
+        fun getInstance(context: Context, scope: CoroutineScope): PlantDatabase {
+
+            return Instance ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    PlantDatabase::class.java,
+                    "plant_database"
+                )
+                    .fallbackToDestructiveMigrationFrom()
+                    .addCallback(PlantDatabaseCallback(scope))
                     .build()
+                Instance = instance
+                instance
             }
-            return instance as PlantDatabase
+
+        }
+        private class PlantDatabaseCallback(
+            private val scope: CoroutineScope
+        ) : RoomDatabase.Callback() {
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
+// If you want to keep the data through app restarts,
+                // comment out the following line.
+                Instance?.let { database ->
+                    scope.launch(Dispatchers.IO) {
+                        populateDatabase(database.plantDAO())
+                    }
+                }
+            }
         }
 
+        suspend fun populateDatabase(plantDAO: PlantDAO) {
+
+            var plant = Plant(1,"Charles", 1)
+            plantDAO.insert(plant)
+            plant = Plant(2, "Heather", 2)
+            plantDAO.insert(plant)
+        }
     }
 }

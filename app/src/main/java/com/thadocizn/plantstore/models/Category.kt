@@ -3,7 +3,7 @@ package com.thadocizn.plantstore.models
 import androidx.room.Entity
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.android.databinding.library.baseAdapters.BR
+import androidx.databinding.library.baseAdapters.BR
 
 /**
  * Created by charles on 15,May,2019
