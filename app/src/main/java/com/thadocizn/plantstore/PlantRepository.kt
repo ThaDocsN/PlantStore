@@ -17,7 +17,7 @@ class PlantRepository {
     private val categories: LiveData<List<Category>>? = null
     private val plants: LiveData<List<Plant>>? = null
 
-    fun EPlantShopRepository(application: Application) {
+    fun PlantRepository(application: Application) {
 
         val plantDatabase = PlantDatabase.getInstance(application)
         categoryDAO = plantDatabase.categoryDAO()

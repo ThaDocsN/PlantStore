@@ -1,6 +1,7 @@
 package com.thadocizn.plantstore
 
 import android.arch.persistence.db.SupportSQLiteDatabase
+import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
@@ -12,15 +13,31 @@ import com.thadocizn.plantstore.models.Plant
 /**
  * Created by charles on 16,May,2019
  */
-
+@Database(entities = [Category::class, Plant::class], version = 1)
 abstract class PlantDatabase : RoomDatabase() {
 
     abstract fun categoryDAO(): CategoryDAO
     abstract fun plantDAO(): PlantDAO
+    companion object{
 
-    private var instance: PlantDatabase? = null
+        @Volatile
+        private var instance: PlantDatabase? = null
+        fun getInstance(context: Context): PlantDatabase {
+            if (instance == null) {
+                @Synchronized
+                instance = Room.databaseBuilder(
+                    context,
+                    PlantDatabase::class.java, "plant_database")
+                    .fallbackToDestructiveMigration()
+                    .build()
+            }
+            return instance as PlantDatabase
+        }
 
-    @Synchronized
+    }
+
+
+    /*@Synchronized
     fun getInstance(context: Context): PlantDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(
@@ -31,15 +48,15 @@ abstract class PlantDatabase : RoomDatabase() {
                 .build()
         }
         return instance as PlantDatabase
-    }
+    }*/
 
 
-    private val callback = object : RoomDatabase.Callback() {
+    /*private val callback = object : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             InitialDataAsyncTask(instance!!).execute()
         }
-    }
+    }*/
 
     private class InitialDataAsyncTask(PlantDatabase: PlantDatabase) : AsyncTask<Void, Void, Void>() {
         private val categoryDAO: CategoryDAO = PlantDatabase.categoryDAO()
