@@ -36,28 +36,6 @@ abstract class PlantDatabase : RoomDatabase() {
 
     }
 
-
-    /*@Synchronized
-    fun getInstance(context: Context): PlantDatabase {
-        if (instance == null) {
-            instance = Room.databaseBuilder(
-                context,
-                PlantDatabase::class.java, "plant_database")
-                .fallbackToDestructiveMigration()
-                .addCallback(callback)
-                .build()
-        }
-        return instance as PlantDatabase
-    }*/
-
-
-    /*private val callback = object : RoomDatabase.Callback() {
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
-            InitialDataAsyncTask(instance!!).execute()
-        }
-    }*/
-
     private class InitialDataAsyncTask(PlantDatabase: PlantDatabase) : AsyncTask<Void, Void, Void>() {
         private val categoryDAO: CategoryDAO = PlantDatabase.categoryDAO()
         private val plantDAO: PlantDAO = PlantDatabase.plantDAO()
