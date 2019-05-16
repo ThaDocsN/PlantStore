@@ -20,9 +20,9 @@ interface PlantDAO {
     fun delete(plant: Plant)
 
     @Query("SELECT * FROM plants_table")
-    fun getAllBooks(): LiveData<List<Plant>>
+    fun getAllPlants(): LiveData<List<Plant>>
 
     @Query("SELECT * FROM plants_table WHERE plant_category==:categoryId")
-    fun getBooks(categoryId: Int): LiveData<List<Plant>>
+    fun getPlants(categoryId: Int): LiveData<List<Plant>>
 
 }

@@ -24,14 +24,13 @@ abstract class PlantDatabase : RoomDatabase() {
     fun getInstance(context: Context): PlantDatabase {
         if (instance == null) {
             instance = Room.databaseBuilder(
-                context.applicationContext,
-                PlantDatabase::class.java, "Plants_database"
-            )
+                context,
+                PlantDatabase::class.java, "plant_database")
                 .fallbackToDestructiveMigration()
                 .addCallback(callback)
                 .build()
         }
-        return instance!!
+        return instance as PlantDatabase
     }
 
 
