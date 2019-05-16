@@ -1,5 +1,6 @@
 package com.thadocizn.plantstore.models
 
+import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.ForeignKey.CASCADE
@@ -15,29 +16,29 @@ import com.android.databinding.library.baseAdapters.BR
 data class Plant(var plantId: Int, var plantName: String, var categoryId: Int):BaseObservable() {
 
     @get:Bindable
-    var plId: Int = plantId
+    var plant_id: Int = plantId
     set(value) {
         if (field != value){
             field = value
-            notifyPropertyChanged(BR.plId)
+            notifyPropertyChanged(BR.plant_id)
         }
     }
 
     @get:Bindable
-    var plName: String = plantName
+    var plant_name: String = plantName
         set(value) {
             if (field != value){
                 field = value
-                notifyPropertyChanged(BR.plName)
+                notifyPropertyChanged(BR.plant_name)
             }
         }
 
     @get:Bindable
-    var plCategory: Int = categoryId
+    var plant_category: Int = categoryId
         set(value) {
             if (field != value){
                 field = value
-                notifyPropertyChanged(BR.plCategory)
+                notifyPropertyChanged(BR.plant_category)
             }
         }
 
