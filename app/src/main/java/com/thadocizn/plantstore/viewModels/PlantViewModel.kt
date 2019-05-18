@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
  */
 class PlantViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var repo: PlantRepository
+    val repo: PlantRepository
 
     var allPlants: LiveData<List<Plant>>
 
@@ -25,15 +25,15 @@ class PlantViewModel(application: Application) : AndroidViewModel(application) {
         allPlants = repo.plants
     }
 
-    fun insert(plant: Plant) = GlobalScope.launch(Dispatchers.IO){
+    fun insert(plant: Plant) = GlobalScope.launch(Dispatchers.IO) {
         repo.insertPlant(plant)
     }
 
-    fun update(plant: Plant) = GlobalScope.launch(Dispatchers.IO){
+    fun update(plant: Plant) = GlobalScope.launch(Dispatchers.IO) {
         repo.updatePlant(plant)
     }
 
-    fun delete(plant: Plant)= GlobalScope.launch(Dispatchers.IO){
+    fun delete(plant: Plant) = GlobalScope.launch(Dispatchers.IO) {
         repo.deletePlant(plant)
     }
 }

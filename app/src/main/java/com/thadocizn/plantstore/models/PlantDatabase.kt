@@ -49,13 +49,18 @@ abstract class PlantDatabase : RoomDatabase() {
                 // comment out the following line.
                 Instance?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.plantDAO())
+                        populateDatabase(database.plantDAO(), database.categoryDAO())
                     }
                 }
             }
         }
 
-        suspend fun populateDatabase(plantDAO: PlantDAO) {
+        fun populateDatabase(plantDAO: PlantDAO, categoryDAO: CategoryDAO) {
+
+            var category = Category(1, "Home","Tesst")
+            categoryDAO.insert(category)
+            category = Category(2, "Outdoor", "Garden")
+            categoryDAO.insert(category)
 
             var plant = Plant(1,"Charles", 1)
             plantDAO.insert(plant)
